@@ -1,36 +1,45 @@
 # SeedOffice
 
-ระบบจัดการงานภายในของทีม **SeedWebs** — รวม งาน/โปรเจกต์ · ลงเวลา · ค่าตอบแทน · อีเมลกลาง · เงินสดย่อย ไว้ที่เดียว เพื่อเลิกใช้ Notion + Everhour + คิดเงินเดือนด้วยมือ
+> **หยุดพัฒนาแล้ว (มิ.ย. 2026)** · รีโปนี้เก็บไว้อ่านอย่างเดียว ไม่รับ issue/PR
+> ทีมย้ายไปพัฒนาเครื่องมือที่ใช้จริงต่อใน **รีโปส่วนตัวของทีม (private)** · เหตุผลอยู่ที่ [ทำไมถึงหยุด](#ทำไมถึงหยุด)
+> โค้ดยังเป็น MIT ใครจะ fork ไปต่อก็ได้
 
-แกนหลักคือลูป **งาน → ชั่วโมงที่ลง → เงิน** (ค่าตอบแทนรายคน + ต้นทุน/กำไรต่อโปรเจกต์)
+ระบบจัดการงานภายในของทีม **SeedWebs** รวม งาน/โปรเจกต์ · ลงเวลา · ค่าตอบแทน · อีเมลกลาง · เงินสดย่อย ไว้ที่เดียว เพื่อเลิกใช้ Notion กับ Everhour และเลิกคิดเงินเดือนด้วยมือ
 
-## สถานะ
+แกนหลักคือลูป **งาน → ชั่วโมงที่ลง → เงิน** (ค่าตอบแทนรายคน · ต้นทุน/กำไรต่อโปรเจกต์)
 
-🚀 **ขึ้น production แล้ว** → **[office.seedwebs.com](https://office.seedwebs.com)** (deploy แรก มิ.ย. 2026)
+## ทำไมถึงหยุด
 
-ใช้งานจริงครบลูป **งาน → เวลา → เงิน** พร้อมฟีเจอร์รอบข้าง:
+**เครื่องมือแบบนี้ควรอยู่ในรีโปส่วนตัว** SeedOffice ผูกกับข้อมูลจริงของทีมตั้งแต่วันแรก (เรตรายคน · ค่าตอบแทน · ลูกค้า) พัฒนาต่อในรีโป public แปลว่าต้องคอยกรองทุก commit ทุก issue ทุกข้อมูลตัวอย่าง
 
-- ✅ **P1** — ลูปเงิน (โปรเจกต์/งาน · ลงเวลา timer+manual · ค่าตอบแทนงวด 25→24 · ต้นทุน/กำไร) + เอกสาร + ลูกค้า/CRM
-- ✅ **P2** — เงินสดย่อย · team hub + ปฏิทินทีม · realtime presence (Durable Objects) · PWA
-- ✅ **P3** — อีเมลกลาง (Gmail: ตอบ/มอบหมาย/ค้นย้อนหลัง) · sync Google Calendar + ICS feed
-- ⏳ ถัดไป: P4 (ใบเสนอราคา → FlowAccount) · แจ้งเตือนภายใน · cutover เลิก Notion/Everhour
+ขอบเขตที่ทีมต้องใช้จริงก็เป็นคนละรูปกับที่สเปกไว้ตรงนี้ ของจริงเริ่มจากรายการงานประจำวันแล้วค่อยต่อเวลาและเงินทีหลัง ไม่ใช่ลูปครบวงอย่างที่ [SPEC.md](./SPEC.md) วางไว้ เริ่มใหม่ให้ตรงตั้งแต่แรกถูกกว่ารื้อสเปกใหญ่ทั้งชุด
 
-> ดีไซน์อ้างอิง [mockup.html](./mockup.html) ([ดู Live](https://seedwebs.github.io/SeedOffice/)) · สเปกเต็ม [SPEC.md](./SPEC.md)
+ของที่ใช้ได้จริงไม่ได้ทิ้ง [`packages/core`](./packages/core) (เงินเป็น integer สตางค์ · เวลาเป็นนาที · งวด 25→24 · payroll) ยกไปใช้ในรีโปใหม่ทั้งชุด ส่วน [SPEC.md](./SPEC.md) กับ [mockup.html](./mockup.html) เก็บไว้อ้างอิง
+
+## ทำถึงไหนก่อนหยุด
+
+- ✅ **P1** ลูปเงิน (โปรเจกต์/งาน · ลงเวลาแบบจับเวลาและลงเอง · ค่าตอบแทนงวด 25→24 · ต้นทุน/กำไร) พร้อมเอกสารและลูกค้า/CRM
+- ✅ **P2** เงินสดย่อย · team hub · ปฏิทินทีม · realtime presence (Durable Objects) · PWA
+- ✅ **P3** อีเมลกลาง (Gmail: ตอบ/มอบหมาย/ค้นย้อนหลัง) · sync Google Calendar และ ICS feed
+- ❌ **P4 (ไม่ได้ทำ)** ใบเสนอราคาส่งเข้า FlowAccount · แจ้งเตือนภายใน · ย้ายออกจาก Notion/Everhour
+
+> ดีไซน์อ้างอิง [mockup.html](./mockup.html) ([ดูของจริง](https://seedwebs.github.io/SeedOffice/)) · สเปกเต็ม [SPEC.md](./SPEC.md)
 
 ## Stack
 
-- **Backend:** Cloudflare Workers · Hono 4 · D1 + Drizzle 0.45 · R2 · Durable Objects (WebSocket presence/collision)
+- **Backend:** Cloudflare Workers · Hono 4 · D1 · Drizzle 0.45 · R2 · Durable Objects (WebSocket presence/collision)
 - **Frontend:** React 19 · Vite 8 · React Router 7 · Tailwind 4.3
-- **Monorepo:** pnpm workspaces — `apps/web` · `apps/api` · `packages/db` (Drizzle) · `packages/core` (โดเมนการเงินล้วน, TDD)
-- **เทสต์:** Vitest 4 (`vitest-pool-workers` รันบน workerd + D1 จริง) + Playwright e2e
+- **Monorepo:** pnpm workspaces · `apps/web` · `apps/api` · `packages/db` (Drizzle) · `packages/core` (โดเมนการเงินล้วน · TDD)
+- **เทสต์:** Vitest 4 (`vitest-pool-workers` รันบน workerd กับ D1 จริง) · Playwright e2e
 
 ## ในรีโป
 
 | ไฟล์ | คือ |
 |------|-----|
-| [`mockup.html`](./mockup.html) | prototype กดได้ (source of truth ของดีไซน์) |
+| [`packages/core`](./packages/core) | ตรรกะเงินกับเวลาล้วน (integer สตางค์/นาที · งวด 25→24 · payroll) พร้อมเทสต์ · ชิ้นที่หยิบไปใช้ต่อได้ตรงที่สุด |
+| [`mockup.html`](./mockup.html) | prototype กดได้ ยึดดีไซน์ตามไฟล์นี้ |
 | [`SPEC.md`](./SPEC.md) | สเปก ขอบเขต และสิทธิ์ตาม role |
-| [`tasks/`](./tasks) | แผน build · task list · progress note |
+| [`tasks/`](./tasks) | แผน build · รายการงาน · บันทึกความคืบหน้า |
 
 > ข้อมูลใน mockup เป็นข้อมูลตัวอย่างทั้งหมด
 
